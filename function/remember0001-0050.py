@@ -317,10 +317,10 @@ def combinationSum(candidates, target):
     return res
 
 def dfs(candidates, i, target, ans, res):
-    if targrt == 0:
+    if target == 0:
         res.append(ans[:])
         return
-    elif taget < 0:
+    elif target < 0:
         return
     else:
         for start in range(i, len(candidates)):

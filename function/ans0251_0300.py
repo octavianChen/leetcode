@@ -161,6 +161,18 @@ def wordPattern(pattern, str):
 
 	return len(set(zip(s, t))) == len(set(s)) == len(set(t)) and len(s) == len(t)
 
+
+# 295 Find Median from Data Stream
+class MedianFinder(object):
+	def __init__(self):
+		pass
+
+	def addNum(self, num):
+		pass
+
+	def findMedian(self):
+		
+
 # 300 Longest Incresing Subsequence
 def lengthOfLIS(nums):
     dp, res = [1 for _ in range(len(nums))], 0

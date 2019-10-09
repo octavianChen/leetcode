@@ -22,7 +22,7 @@ def spiralMatrix(matrix):
                 res.append(matrix[i][ty])
         else:
             for i in range(ty, by):
-                    res.append(matrix[tx][i])
+                res.append(matrix[tx][i])
             for i in range(tx, bx):
                 res.append(matrix[i][by])
             for i in range(by, ty, -1):

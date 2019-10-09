@@ -71,6 +71,12 @@ def longestIncreasingPath(matrix):
 
 	return max([max(x) for x in dp])
 
+
+# 332 Reconstruct Itinerary
+def findItinerary(tickets):
+	
+	
+
 # 337 House Robber III
 def rob(root):
 	m = {}

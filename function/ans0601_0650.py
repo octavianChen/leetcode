@@ -40,6 +40,11 @@ def mergeTrees(t1, t2):
 	root.right = mergeTrees(t1.right, t2.right)
 	return root
 
+
+# 621 Task Scheduler
+def leastInterval(tasks, n):
+	
+
 # 623 Add One Row to Tree
 def addOneRow(root, v, d):
 	if d == 1:
