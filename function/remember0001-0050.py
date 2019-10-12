@@ -338,7 +338,7 @@ def dfs(nums, start, target, ans, res):
     if target == 0:
         res.append(ans[:])
         return
-    elif target:
+    elif target < 0:
         return
     for i in range(start, len(nums)):
         if i == start or nums[i] != nums[i-1]:

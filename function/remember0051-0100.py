@@ -352,10 +352,10 @@ def inorderTraversal(root):
             m.append(p)
             p = p.left
 
-        if m:
-            p = m.pop()
-            res.append(p.val)
-            p = p.right
+        
+        p = m.pop()
+        res.append(p.val)
+        p = p.right
     return res
 
 
