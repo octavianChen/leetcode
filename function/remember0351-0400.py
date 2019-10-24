@@ -33,6 +33,6 @@ def isSubsequence(s, t):
 	m, n, i = len(s), len(t), 0 # s 是否是 t 的子序列
 
 	for j in range(n):
-		if i < m and s[i] == t[i]:
+		if i < m and s[i] == t[j]:
 			i += 1
 	return i == m

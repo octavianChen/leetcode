@@ -1,4 +1,4 @@
-class ListNode(object):
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class ListNode(object):
     def __init__(self, val):
         self.val = val
         self.next = None
@@ -216,13 +216,29 @@ def removeDuplicates(nums):
 def search(nums, target):
     lo, hi = 0, len(nums) - 1
 
-    while lo < hi:
-        if nums[low] < nums[hi]:
-            break
-
+    while lo <= hi:
         mid = (lo + hi) // 2
 
-        if nums[lo] > nums[hi]:
+        if nums[mid] == target: # 找到目标
+            return True
+
+        elif nums[mid] > nums[hi]: # [lo, mid] 是有序的
+            if nums[lo] <= target < nums[mid]:
+                hi = mid - 1
+
+            else:
+                lo = mid + 1
+
+        elif nums[mid] < nums[hi]:#[mid, hi] 是有序的
+            if nums[mid] < target <= nums[hi]:
+                lo = mid + 1
+            else:
+                hi = mid - 1
+
+        else:
+            hi -= 1
+
+    return False
             
 
 # 82 Remove Duplicates from Sorted List II

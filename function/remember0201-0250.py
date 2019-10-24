@@ -148,6 +148,17 @@ def findKthLargest(nums, k):
         else:
             lo = index + 1
 
+def partition(nums, lo, hi):
+    pivot, i = nums[hi], lo-1
+
+    for j in range(lo, hi):
+        if nums[j] >= pivot:
+            i = i+1
+            nums[i], nums[j] = nums[j], nums[i]
+
+    nums[i+1], nums[hi] = nums[hi], nums[i+1]
+    return i+1
+
 # 216 Combination Sum III
 def combinationSum3(k, n):
     res, out = [], []
@@ -166,18 +177,6 @@ def combinationSum3(k, n):
 
     dfs(1, n)
     return res
-
-def partition(nums, lo, hi):
-    pivot, i = nums[hi], lo-1
-
-    for j in range(lo, hi):
-        if nums[j] >= pivot:
-            i = i+1
-            nums[i], nums[j] = nums[j], nums[i]
-
-    nums[i+1], nums[hi] = nums[hi], nums[i+1]
-    return i+1
-
 
 # 222 Count Complete Tree Nodes, 最左边和最右边是否是长度一样，一样就是完美二叉树
 # 不一样就接着递归操作
@@ -236,7 +235,7 @@ def in2post(s): # 中缀转后缀
                 op.pop()
 
             else: # 遇到+-, 同等优先级的也一直pop,最后加入当前符号
-                while st and st[-1] !+= "(":
+                while st and st[-1] != "(":
                     st.append(op.pop())
                 op.append(s[i])
 

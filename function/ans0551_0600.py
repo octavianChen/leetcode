@@ -44,6 +44,19 @@ def maxDepth(root):
 		res = max(self.maxDepth(child) + 1, res)
 	return res
 
+# 560 SubArray Sum Equals K
+def subarraySum(nums, k):
+	m, cnt, val = {0:1}, 0, 0
+
+    for num in nums:
+        val += num
+
+        cnt += m.get(val - k, 0)
+
+        m[val] = m.get(val, 0) + 1
+
+    return cnt
+
 # 561 Array Partition I
 def arrayPairSum(nums):
 	nums, res = sorted(nums), 0

@@ -7,7 +7,7 @@ def findSubsequences(nums):
 			res.add(tuple(out))
 
 		for i in range(start, len(nums)):
-			if not out or nums[i] >= path[-1]:
+			if not out or nums[i] >= out[-1]:
 				out.append(nums[i])
 				dfs(i+1)
 				out.pop()

@@ -159,6 +159,23 @@ def splitListToParts(root, k):
 		ans.append(dumpy.next)
 		return ans
 
+# 733 Flood Fill
+def floddFill(image, sr, sc, newColor):
+	if image[sr][sc] == newColor:
+            return image
+
+    def dfs(sr, sc, val):
+        image[sr][sc] = newColor
+
+        for dirs in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+            r, c = sr + dirs[0], sc + dirs[1]
+
+            if 0 <= r < len(image) and 0 <= c < len(image[0]) and image[r][c] == val:
+                dfs(r, c, val)
+
+    dfs(sr, sc, image[sr][sc])
+    return image
+
 # 739 Daily Temperature, 单调栈
 def dailyTemperature(T):
 	st, res = [], [0 for _ in range(len(T))]

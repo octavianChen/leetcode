@@ -235,6 +235,22 @@ def help(root):
     cur.right = right
     return root
 
+# 115 Distinct SubSequences
+def numDistinct(s, t):
+    dp = [[0 for _ in range(len(t) + 1)] for _ in range(len(s) + 1)]
+    for i in range(len(s)+1):
+        dp[i][0] = 1
+
+    for i in range(1, len(s)+1):
+        for j in range(1, len(t)+1):
+            if s[i-1] == t[j-1]:
+                dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
+            else:
+                dp[i][j] = dp[i-1][j]
+
+    return dp[len(s)][len(t)]
+
+
 # 116 Populating Next Right Pointers in Each Node
 def connect(root):
 	if not root:
@@ -364,6 +380,34 @@ def isPalindrome(s):
     res = "".join([c.lower() for c in s if c.isalnum()])
     return res == res[::-1]
 
+# 126 Word Ladder II
+def findLadders(beginWord, endWord, wordList):
+    
+
+
+# 127 Word Ladder
+def ladderLength(beginWord, endWord, wordList):
+    m = set(wordList)
+
+    import string, Queue
+
+    q = Queue.Queue()
+    q.put((beginWord, 1))
+
+    while not q.empty():
+        word, lens = q.get()
+
+        if word == endWord:
+            return lens
+
+        for i in range(len(word)):
+            for c in string.lowercase:
+                neword = word[0:i] + c + word[i+1:]
+
+                if neword != word and neword in m:
+                    m.remove(neword)
+                    q.put((neword, lens+1))
+    return 0
 
 # 129 Sum Root to Leaf Numbers
 def sumNumbers(root):
@@ -440,6 +484,11 @@ def cloneGraph(node):
         return clone
 
     return dfs(node)
+
+
+# 134 Gas Station
+def canCompleteCircuit(gas, cost):
+     
 
 # 136 Single Number,异或位操作，两个相同的数字异或为0,0与任何数字异或还是原来的数字
 def singleNumber(nums):

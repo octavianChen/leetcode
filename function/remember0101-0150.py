@@ -226,7 +226,7 @@ def copyRandomList(head):
 
 # 142 Linked List Cycle II, 先找到相遇的位置，然后慢指针回头，快慢都单步走
 def detectCycle(head):
-    slow, fast. res = head, head, -1
+    slow, fast = head, head
 
     while fast and fast.next:
         slow, fast.next = slow.next, fast.next.next
@@ -293,7 +293,7 @@ def postorderTraversal(root):
 def postorderTraversal(root):
     st, res = [], []
 
-    if root:
+    if not root:
         return res
     st.append(root)
 
@@ -308,7 +308,7 @@ def postorderTraversal(root):
 
 
 
-# 147 Insertation Sort List, 找到位置最关键
+# 147 Insertion Sort List, 找到位置最关键
 def insertionSortList(head):
     dumpy = ListNode(-1)
     cur = dumpy

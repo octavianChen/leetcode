@@ -257,6 +257,23 @@ def removeDuplicates(nums):
     return i + 1
 
 
+# 32 Longest Valid Parentheses, 通项公式dp[i] 表示以 s[i-1] 结尾的最长长度
+def longestValidParentheses(s):
+    dp, res = [0 for _ in range(len(s)+1)], 0
+
+    for i in range(1, len(s)+1):
+        j = i - 2 - dp[i-1]
+
+        if s[i-1] == "(" or j < 0 or s[j] == ")":
+            dp[i] = 0
+
+        else:
+            dp[i] = dp[i-1] + 2 + dp[j]
+            res = max(res, dp[i])
+
+    return res
+
+
 # 33 Search in Rotated Sorted Array, 注意旋转数组与最右的数字比较大小而不是最左
 def search(nums. target):
     low = 0
@@ -390,6 +407,26 @@ def help(a, b):
 
     return "".join(str(x) for x in vals[::-1])
     
+
+# 44 Wildcard Matching, 状态转移方程要确定
+def isMatch(s, p):
+    dp = [[False for _ in range(len(p)+1)] for _ in range(len(s)+1)]
+    dp[0][0] = True
+
+    for i in range(1, len(p)+1):
+        if p[i-1] == "*": #初始状态一定要确定好
+            dp[0][i] = dp[0][i-1]
+
+    for i in range(1, len(s)+1):
+        for j in range(1, len(p)+1):
+            if p[j-1] == "*":#等于*的处理情况
+                dp[i][j] = dp[i-1][j] or dp[i][j-1]
+
+            else:
+                dp[i][j] = (p[j-1] == "?" or s[i-1] == p[j-1]) and dp[i-1][j-1]
+
+    return dp[len(s)][len(p)]
+
 
 # 46 Permutations
 def permute(nums):
