@@ -46,6 +46,55 @@ def findMedianSortedArrays1(nums1, i, nums2, j, k):
         return findMedianSortedArrays1(nums1, i, nums2, j + k//2, k-k//2)
 
 
+# python 的另一种解法
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        
+        
+        def getKthSmallestNumbFromTwoLists(list_1, start_1, end_1, list_2, start_2, end_2, k):
+            length_1 = end_1 - start_1 + 1
+            length_2 = end_2 - start_2 + 1
+
+            # 在我们的helper function set up中 希望list1 是那个短的 且在process的过程中 也是list_1 短
+            # if length_1 > length_2:
+            #     return getKthSmallestNumbFromTwoLists(list_2, start_2, end_2, list_1, start_1, end_1, k)
+
+            # Three base case 
+            if length_1 == 0 and length_2 > 0:
+                return list_2[start_2 + k -1]
+            if length_1 > 0 and length_2 == 0:
+                return list_1[start_1 + k -1]
+            
+            if k == 1: #在文档描述中也有，若k== 1， 则只需看两个list中第一个数字哪个小即可
+                return min(list_1[start_1], list_2[start_2])
+
+
+            #此处i, j 为何等于这个 画图即知
+            i = start_1 + min(length_1, k//2) -1
+            j = start_2 + min(length_2, k//2) -1
+
+
+            if list_1[i] > list_2[j]:
+                return getKthSmallestNumbFromTwoLists(list_1, start_1, end_1, list_2, j+1, end_2, k - (j-start_2+1)) #同上，这里以及下面为啥是k - (j-start_2+1) 画图即知
+            else:
+                return getKthSmallestNumbFromTwoLists(list_1, i+1, end_1, list_2, start_2, end_2, k - (i-start_1+1))
+            
+            
+    
+        m = len(nums1)
+        n = len(nums2)
+        if (m+n)%2 == 0:
+            return (getKthSmallestNumbFromTwoLists(nums1, 0, m-1, nums2, 0, n-1, (m+n)/2) + getKthSmallestNumbFromTwoLists(nums1, 0, m-1, nums2, 0, n-1, (m+n)/2+1))*0.5
+        else:
+            return getKthSmallestNumbFromTwoLists(nums1, 0, m-1, nums2, 0, n-1, (m+n)/2+1)
+        
+
+
 # 10 Regular Expression Matching
 def isMatch(s, p):
     # p 为空
