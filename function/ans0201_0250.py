@@ -592,6 +592,10 @@ class MyQueue(object):
     def empty(self):
         return not self.instack and not self.outstack
 
+# 233 Number of Digit One
+def countDigitOne(n):
+    
+
 # 234 Palindrome Linkded list
 def isPalindrome(head):
     if not head or not head.next:

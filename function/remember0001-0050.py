@@ -119,6 +119,27 @@ def isMatch(s, p):
 
     return isMatch(s, p[2:])
 
+def isMatch(s, p):
+    dp = [[False for _ in range(len(p) + 1)] for _ in range(len(s)+1)]
+    dp[0][0] = True
+
+    for i in range(2, len(p) + 1):
+        if p[i-1] == "*":
+            dp[0][i] = dp[0][i-2]
+
+    for i in range(1, len(s)+1):
+        for j in range(1, len(p) + 1):
+            if s[i-1] == p[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+
+            elif p[j-1] == ".":
+                dp[i][j] = dp[i-1][j-1]
+
+            elif p[j-1] == "*": # dp[i][j-1]匹配一次dp[i][j-2] 匹配零次, 
+                dp[i][j] = dp[i][j-1] or dp[i][j-2] or (dp[i-1][j] and (s[i-1] == p[j-2] or p[j-2]=="."))
+
+    return dp[len(s)][len(p)]
+
 
 # 11 Container with the most water,双指针滑窗法
 def maxAreas(height):
@@ -227,16 +248,15 @@ def generateParenthesis(n):
     res = []
 
     def dfs(left, right, out):
-        if left > right:
-            return
 
         if left == 0 and right == 0:
             res.append(out)
+            return
 
         if left > 0:
             dfs(left - 1, right, out + "(")
 
-        if right > 0:
+        if left < right: # 此时可以开始加右括号
             dfs(left, right - 1, out + ")")
 
     dfs(n, n, "")
