@@ -221,6 +221,13 @@ def maxSubarray(nums):
 
 	return res
 
+
+# 33 把数组排成最小的数
+def (numbers):
+ 	res = "".join(sorted(list(map(str, numbers)), cmp=lambda x, y:cmp(x+y, y+x))).lstrip("0")
+ 	return res if res else "0"
+
+
 # 35 第一个只出现一次的字符
 def firstUniqChar(s):
 	m = {}
