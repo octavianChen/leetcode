@@ -227,6 +227,27 @@ def (numbers):
  	res = "".join(sorted(list(map(str, numbers)), cmp=lambda x, y:cmp(x+y, y+x))).lstrip("0")
  	return res if res else "0"
 
+# 34 丑数
+def nthUglyNumber(n):
+	res, i2, i3, i5 = [1], 0, 0, 0
+
+	while len(res) < n:
+		m2, m3, m5 = res[i2] * 2, res[i3] * 3, res[i5] * 5
+
+		candi = min(m2, min(m3, m5))
+
+		if candi == m2:
+			i2 += 1
+
+		if candi == m3:
+			i3 += 1
+
+		if candi == m5:
+			i5 += 1
+
+		res.append(candi)
+
+	return res[-1]
 
 # 35 第一个只出现一次的字符
 def firstUniqChar(s):

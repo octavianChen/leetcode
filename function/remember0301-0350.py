@@ -1,6 +1,24 @@
+# 313 Super Ugly Number, 延续 264 Ugly Number II 的方针
+def nthSuperUglyNumber(n, primes):
+    res, index = [1], [1 for _ in range(len(primes))]
+
+    while len(res) < n:
+        candidates = [res[index[i]] * primes[i] for i in range(len(primes))]
+
+        minval = min(candidates)
+        for i in range(len(candidates)):
+            if candidates[i] == minval:
+                index[i] += 1
+
+        res.append(minval)
+
+    return res[-1]
+
+
 # 322 Coin Change
 def coinChange(coins, amount):
-    dp = [i for i in range(amount + 1)]
+    dp = [amount + 1 for i in range(amount + 1)]
+    dp[0] = 0
 
     for i in range(1, amount + 1):
         for j in range(len(coins)):

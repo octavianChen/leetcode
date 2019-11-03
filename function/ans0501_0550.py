@@ -137,6 +137,10 @@ def longestPalindromeSubseq(s):
 				dp[i][j] = max(dp[i+1][j], dp[i][j-1])
 	return dp[0][n-1]
 
+
+# 518 Coin Change 2
+
+
 # 520 Detect Capital
 def detectCapitalUse(word):
 	if len(word) <= 1:

@@ -241,6 +241,10 @@ def rob(nums):
 
     return max(ans1, ans2)
 
+# 214 Shortest Palindrome
+def shortestPalindrome(s):
+    
+
 # 216 Combination Sum III
 def combinationSum3(k, n):
     res, out = [], []

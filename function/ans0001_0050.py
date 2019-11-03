@@ -648,7 +648,7 @@ def dfs(candidates, i, target, ans, res):
         return
     else:
         for start in range(i, len(candidates)):
-            ans.append(en)
+            ans.append(candidates[i])
             dfs(candidates, start, target-candidates[start], ans, res)
             ans.pop()
 
