@@ -405,6 +405,28 @@ def numTrees(n):
             dp[i] += dp[j] * dp[i-j-1]
     return dp[n]
 
+
+# 97 Interleaving String, dp[i][j]表示s1的前i个字符和s2的前j个字符是否匹配s3的前 i+j 个字符
+def isInterleave(s1, s2, s3):
+    m, n = len(s1), len(s2)
+
+    if m + n != len(s3):
+        return False
+
+    dp = [[True for _ in range(n+1)] for _ in range(m+1)]
+
+    for i in range(1, m+1):
+        dp[i][0] = dp[i-1][0] and s1[i-1] == s3[i-1]
+
+    for i in range(1, n+1):
+        dp[0][i] = dp[0][i-1] and s2[i-1] == s3[i-1]
+
+    for i in range(m+1):
+        for j in range(n+1):
+            dp[i][j] = (dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])
+
+    return dp[m][n]
+
 # 98 Validate Binary Search Tree, 注意闭包的变量赋值问题
 def isValidBST(root):
     self.pval = -float("inf")
