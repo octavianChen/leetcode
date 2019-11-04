@@ -138,7 +138,19 @@ def longestPalindromeSubseq(s):
 	return dp[0][n-1]
 
 
-# 518 Coin Change 2
+# 518 Coin Change 2 # dp[i][j] 表示 coins 中前 i 个硬币组成 j 块钱的方法, 分不用当前
+# 硬币和用当前硬币两种，注意通项公式
+def change(amount, coins):
+	dp = [[0 for _ in range(amount+1)] for _ in range(len(coins)+1)]
+	dp[0][0] = 1
+
+	for i in range(1, len(coins)+1):
+		dp[i][0] = 1
+		for j in range(1, amount+1):
+			cnt = dp[i][j-coins[i-1]] if j >= coins[i-1] else 0
+			dp[i][j] = dp[i-1][j] + cnt
+
+	return dp[len(coins)][amount]
 
 
 # 520 Detect Capital

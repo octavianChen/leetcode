@@ -241,9 +241,19 @@ def rob(nums):
 
     return max(ans1, ans2)
 
-# 214 Shortest Palindrome
+# 214 Shortest Palindrome, 翻转过来然后开始从前比到后
 def shortestPalindrome(s):
-    
+    t = s[::-1]
+
+    if t == "":
+        return ""
+
+    for i in range(len(s), 0, -1):
+        if s[:i] == t[len(t) - i:]:
+            break
+
+    return t[:len(t) - i] + s
+
 
 # 216 Combination Sum III
 def combinationSum3(k, n):
