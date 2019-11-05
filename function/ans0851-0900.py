@@ -123,6 +123,35 @@ def middleNode(head):
 
 # 885 Spiral Matrix III
 def spiralMatrixIII(R, C, r0, c0):
+    res, step = [], 1
+
+
+    def addIndex(r, c):
+        if 0 <= r < R and 0 <= c < C:
+            res.append([r, c])
+
+    while len(res) < R * C:
+        for i in range(step):
+            addIndex(r0, c0)
+            c0 += 1
+
+        for i in range(step):
+            addIndex(r0, c0)
+            r0 += 1
+
+        step += 1
+
+        for i in range(step):
+            addIndex(r0, c0)
+            c0 -= 1
+
+        for i in range(step):
+            addIndex(r0, c0)
+            r0 -= 1
+
+        step += 1
+
+    return res
     
 
 # 897 Increasing Order Search Tree

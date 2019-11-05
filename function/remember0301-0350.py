@@ -25,7 +25,7 @@ def coinChange(coins, amount):
             if coins[j] <= i:
                 dp[i] = min(dp[i], dp[i - coins[j]] + 1)
 
-    return -a if dp[amount] > amount else dp[amount]
+    return -1 if dp[amount] > amount else dp[amount]
 
 
 # 329 Longest Increasing Path in a Matrix, 深度优先搜索加动态规划, dp[i][j] 记录的

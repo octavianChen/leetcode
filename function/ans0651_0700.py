@@ -192,6 +192,30 @@ def help(root, f, s):
 	help(root.right, f, s)
 
 
+# 673 Number of Longest Increasing Subsequence, 用另一个数组记录LIS的个数,
+# 注意状态转移方程
+def findNumberOfLIS(nums):
+	res, mx = 0, 0
+	dp, cnt = [1 for _ in range(len(nums))], [1 for _ in range(len(nums))]
+
+	for i in range(len(nums)):
+		for j in range(i):
+			if nums[j] < nums[i]:
+				if dp[i] == dp[j] + 1:
+					cnt[i] += cnt[j]
+
+				elif dp[i] < dp[j] + 1:
+					dp[i], cnt[i] = dp[j] + 1, cnt[j]
+
+		if mx == dp[i]:
+			res += cnt[i]
+
+		elif mx < dp[i]:
+			mx, res = dp[i], cnt[i]
+
+	return res
+
+
 # 674 Longest Continuous Increasing Subsequence
 def findLengthOfLCIS(nums):
 	if not nums:

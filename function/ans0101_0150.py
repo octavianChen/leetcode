@@ -349,13 +349,18 @@ def maxProfit(prices):
     return res
 
 
-# 122 Best Time to Buy and Sell Stock
+# 122 Best Time to Buy and Sell Stock II
 def maxProfit(prices):
     res = 0
     for i in range(len(nums)-1):
         if prices[i] < prices[i+1]:
             res += prices[i+1]-prices[i]
     return res
+
+
+# 123 Best Time to Buy and Sell Stock III
+def maxProfit(prices):
+    
 
 # 124 Binary Tree Maximum Path Sum
 class Solution(object):
