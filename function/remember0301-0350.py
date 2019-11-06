@@ -28,6 +28,13 @@ def coinChange(coins, amount):
     return -1 if dp[amount] > amount else dp[amount]
 
 
+# 324 Wiggle Sort
+def wiggleSort(nums):
+    
+
+
+
+
 # 329 Longest Increasing Path in a Matrix, 深度优先搜索加动态规划, dp[i][j] 记录的
 # 是从 i, j 出发的最长路径的长度
 def longestIncreasingPath(matrix):
