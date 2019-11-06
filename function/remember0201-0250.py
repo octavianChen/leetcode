@@ -134,6 +134,19 @@ def help(word, i, p):
                 return True
         return False
 
+# 214 Shortest Palindrome, 翻转过来然后开始从前比到后
+def shortestPalindrome(s):
+    t = s[::-1]
+
+    if t == "":
+        return ""
+
+    for i in range(len(s), 0, -1):
+        if s[:i] == t[len(t) - i:]:
+            break
+
+    return t[:len(t) - i] + s
+
 # 215 Kth Largest Element in an Array
 def findKthLargest(nums, k):
     lo, hi = 0, len(nums)-1

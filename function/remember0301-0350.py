@@ -28,11 +28,19 @@ def coinChange(coins, amount):
     return -1 if dp[amount] > amount else dp[amount]
 
 
-# 324 Wiggle Sort
+# 324 Wiggle Sort, 排序后左半段逆序放在偶数位上，右半段逆序放在奇数位上
 def wiggleSort(nums):
-    
+    tmp = sorted(nums[:])
 
+    k, j = (len(nums) + 1) // 2 - 1, len(nums) - 1
 
+    for i in range(len(nums)):
+        if i % 2 == 0:
+            nums[i] = tmp[k]
+            k -= 1
+        else:
+            nums[i] = tmp[j]
+            j -= 1
 
 
 # 329 Longest Increasing Path in a Matrix, 深度优先搜索加动态规划, dp[i][j] 记录的

@@ -1,3 +1,7 @@
+# 374 Wiggle Subsequence
+def wiggleSubsequence(nums):
+	
+
 # 378 Kth Smallest Element in a Sorted Matrix, 从矩阵左下角到右上角的阶梯型遍历
 def kthSmallest(matrix, k):
 	lval, hval = matrix[0][0], matrix[-1][-1] # 矩阵左上角和右下角的元素

@@ -473,6 +473,48 @@ def kthSmallest(root):
 
 
 
+def kmeans(data, k):
+	m = len(data) # 数据点个数
+	n = len(data[0]) # 数据维度
+	cluster_center = np.zeros((k, n)) # 每行表示一个聚类中心
+
+	init_list = np.random.randomint(low=0, high=m, size=k)
+
+	for index, j in enumerate(init_list):
+		cluster_center[index] = data[j][:] # 随机选取 k 个点做聚类中心
+
+	# 聚类
+	cluster = np.zeros(m, dtype=np.int) - 1
+
+	cc = np.zeros((k, n)) # 下一轮聚类中心
+
+	c_number = np.zeros(k) # 每个聚类中心上样本的数目
 
 
+	for times in range(1000):
+		for i in range(m):
+			c = nearest(data[i], cluster_center) # 计算每个数据点和所有聚类中心的距离，返回属于哪个聚类中心
+			cluster[i] = c # 第 i 个点属于 第 c 个聚类中心
+			c_number[c] += 1 # 第 c 个聚类中心的个数加一
+			cc[c] += data[i]
 
+		for i in range(k):
+			cluster_center[i] = cc[c] / c_number[i]
+
+		cc.flat, c_number.flat = 0, 0
+
+	return cluster
+
+
+def nearest(data, cluster_center):
+	nearest_center_index = 0
+	distance = float("inf")
+
+	for index, cluster_center_one in enumerate(cluster_center):
+		dis = np.sum((data - center) ** 2)
+
+		if dis < distance:
+			nearest_center_index = index
+			distance = dis
+
+	return nearest_center_index
