@@ -40,3 +40,26 @@ def isSubsequence(s, t):
 		if i < m and s[i] == t[j]:
 			i += 1
 	return i == m
+
+# 394 Decode String
+def decodeString(s):
+	curnum, curstr, st = 0, "", []
+
+	for char in s:
+		if char == "[":
+			st.append(curstr)
+			st.append(curnum)
+			curstr, curnum = "", 0
+
+		elif char == "]":
+			prenum = st.pop()
+			prestr = st.pop()
+			curstr = prestr + prenum * curstr
+
+		elif char.isdigit():
+			curnum = curnum * 10 + int(char)
+
+		else:
+			curstr += char
+
+	return curstr

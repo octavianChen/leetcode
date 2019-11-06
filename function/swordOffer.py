@@ -155,6 +155,30 @@ def levelOrderTraversal(root):
 	return res
 
 
+# 25 二叉树中和为某一值的路径
+def pathSum(root, target):
+	res, out = [], []
+
+	def dfs(p, target):
+		if p is None:
+			return 
+
+		out.append(p.val)
+
+		if p.left is None and p.right is None and p.val == target:
+			res.append(out[:])
+
+		dfs(p.left, target-p.val)
+		dfs(p.right, target-p.val)
+
+		out.pop()
+
+	dfs(root, target)
+
+	return res
+
+
+
 # 26 复杂链表的复制
 def copyRandomList(head):
 	dumpy = Node(0, None, None)
