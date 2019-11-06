@@ -127,6 +127,28 @@ def maxProfit(prices):
             res += prices[i+1]-prices[i]
     return res
 
+# 123 Best Time to Buy and Sell Stock III
+def maxProfit(prices):
+    # 定义两个数组
+    # local[i][j]到达第i天时最多可进行j次交易并且最后一次交易是i天时的最大利润
+    # global[i][j]到达第i天时最多可进行j次交易的最大利润
+    # local[i][j] = max(global[i-1][j-1] + max(diff, 0), local[i-1][j] + diff)
+    # global[i][j] = max(local[i][j], global[i-1][j])
+    if not prices:
+        return 0
+
+    n = len(prices)
+    l, g = [[0, 0, 0] for _ in range(n)], [[0, 0, 0] for _ in range(n)]
+
+    for i in range(1, len(prices)):
+        diff = prices[i] - prices[i-1]
+
+        for j in range(1, 3):
+            l[i][j] = max(g[i-1][j-1] + max(diff, 0), l[i-1][j] + diff)
+            g[i][j] = max(l[i][j], g[i-1][j])
+
+    return g[n-1][2]
+
 # 124 Binary Tree Maximum Path Sum, 注意递归的调用以及只加加正数的操作
 class Solution(object):
     def maxPathSum(self, root):
@@ -145,6 +167,23 @@ class Solution(object):
         help(root)
         return self.res
 
+# 132 Palindrome Partition II, dp[i] 表示区间[0, i]内需要切的刀数
+def minCut(s):
+    if not s:
+        return 0
+
+    p = [[False for _ in range(len(s))] for _ in range(len(s))]
+    dp = [0 for _ in range(len(s))]
+
+    for i in range(len(s)):
+        dp[i] = i
+
+        for j in range(0, i+1):
+            if s[i] == s[j] and (i - j < 2 or p[j+1][i-1]):
+                p[j][i] = True
+                dp[i] = 0 if j == 0 else min(dp[i], dp[j-1] + 1)
+
+    return dp[len(s)-1]
 
 # 133 Clone Graph, 本质上还是用字典保存复制的节点，然后 dfs
 def cloneGraph(node):
@@ -223,6 +262,22 @@ def copyRandomList(head):
         t, cur = t.next, cur.next
 
     return h
+
+# 139 Word Break, dp[i]表示前i个字符是否可以被break
+def wordBreak(s, wordDict):
+    m, dp = set(wordDict), [False for _ in range(len(s) + 1)]
+    dp[0] = True
+
+    for i in range(len(s) + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in s:
+                dp[i] = True
+                break
+
+    return dp[-1]
+
+# 140 Word Break II
+
 
 # 142 Linked List Cycle II, 先找到相遇的位置，然后慢指针回头，快慢都单步走
 def detectCycle(head):

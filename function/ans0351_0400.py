@@ -45,6 +45,9 @@ def guessNumber(n):
 			hi = mid - 1
 	return mid
 
+# 376 Wiggle Subsequence
+def wiggleMaxLength(nums):
+	
 
 # 378 Kth Smallest Element in a Sorted Matrix, 从矩阵左下角到右上角的阶梯型遍历
 def kthSmallest(matrix, k):
