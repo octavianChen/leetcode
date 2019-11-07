@@ -432,6 +432,22 @@ def dfs(nums, start, target, ans, res):
             dfs(nums, i+1, target-nums[i], ans, res)
             out.pop()
 
+# 41 First Missing Positive, 将 i 放到下角标 i - 1 处
+def firstMissingPositive(nums):
+    i = 0
+    while i < len(nums):
+        if 0 < nums[i] <= len(nums):
+            index = nums[i]
+            if nums[i] != nums[index - 1]:
+                nums[i], nums[index - 1] = nums[index - 1], nums[i]
+                i -= 1
+        i += 1
+
+    for i in range(len(nums)):
+        if nums[i] != i + 1:
+            return i + 1
+    return len(nums) + 1  
+
 # 42 Trapping Rain Water, 递减栈，遇到高于栈顶的元素触发计算, 此时弹出栈顶
 # 元素，这就是坑，现在的栈顶元素与当前高度较小的那个是挡板，减去坑，乘以宽
 def trap(height):
@@ -495,6 +511,11 @@ def isMatch(s, p):
                 dp[i][j] = (p[j-1] == "?" or s[i-1] == p[j-1]) and dp[i-1][j-1]
 
     return dp[len(s)][len(p)]
+
+# 45 Jump Game II
+def jump(nums):
+    
+
 
 
 # 46 Permutations

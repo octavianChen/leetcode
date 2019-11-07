@@ -40,8 +40,16 @@ def spiralMatrix(matrix):
     return res
 
 
-# 55 Jump Game
+# 55 Jump Game, dp[i]表示到i位置的剩余跳力
 def canJump(nums):
+    dp = [0 for _ in range(len(nums))]
+
+    for i in range(1, len(nums)):
+        dp[i] = max(dp[i-1], nums[i-1]) - 1
+
+        if dp[i] < 0:
+            return False
+    return True
     
 
 # 56 Merge Intervals
