@@ -344,7 +344,7 @@ def longestValidParentheses(s):
 
 
 # 33 Search in Rotated Sorted Array, 注意旋转数组与最右的数字比较大小而不是最左
-def search(nums. target):
+def search(nums, target):
     low = 0
     high = len(nums) - 1
     

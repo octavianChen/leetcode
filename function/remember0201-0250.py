@@ -387,3 +387,21 @@ def maxSlidingWindow(nums, k):
             res.append(nums[q[0]])
 
     return res
+
+def maxSlidingWidow(nums, k):
+    from collections import deque
+    res, q = [], deque()
+
+    for i in range(len(nums)):
+        if q and i - q[0] >= k:
+            q.popleft()
+
+        while q and nums[q[-1]] <= nums[i]:
+            q.pop()
+
+        q.append(i)
+
+        if i >= k-1:
+            res.append(q[0])
+
+    return res

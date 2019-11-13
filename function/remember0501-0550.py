@@ -37,6 +37,8 @@ def change(amount, coins):
 
     return dp[len(coins)][amount]
 
+# 519 Random Flip the Matrix
+
 
 # 521 Longest Uncommon Subsequence I, 字符串若相等，必定没有LUS，不等，自然是最长的那个
 def findLUSlength(a, b):

@@ -496,7 +496,7 @@ def kthSmallest(root):
 		p, cnt = p.right, cnt + 1
 
 
-
+# Kmeans 算法
 def kmeans(data, k):
 	m = len(data) # 数据点个数
 	n = len(data[0]) # 数据维度
@@ -542,3 +542,104 @@ def nearest(data, cluster_center):
 			distance = dis
 
 	return nearest_center_index
+
+
+# 两个有序数组找中位数
+def topK(A, s1, e1, B, s2, e2, k):
+	l1, l2 = e1- s1 + 1, e2 - s2 + 1
+	i, j = s1 + min(k//2, l1) - 1, s2 + min(k//2, l2) - 1
+
+	if l1 == 0 and l2 > 0:
+		return B[s2 + k - 1]
+
+	if l2 == 0 and l1 > 0:
+		return A[s1 + k - 1]
+
+	if k == 1:
+		return min(A[s1], B[s2])
+
+	if A[i] > B[j]:
+		return topK(A, s1, e1, B, j+1, e2, k-(j-s2+1))
+	else:
+		return topK(A, i+1, e1, B, s2, e2, k-(i-s1+1))
+
+
+def findMedianSortedArrays(nums1, nums2):
+	if len(num1) > len(nums2):
+		nums1, nums2 = nums2, nums1
+	m, n = len(nums1), len(nums2)
+
+	if (m + n) % 2 == 0:
+		return (topK(nums1, 0, m-1, nums2, 0, n-1, (m+n)/2) + topK(nums1, 0, m-1, nums2, 0, n-1, (m+n)/2+1))/2.0
+	else:
+		return topK(nums1, 0, m-1, nums2, 0, n-1, (m+n+1)/2)
+
+# KNN tensorflow实现
+import tensorflow as tf
+import numpy as np
+
+# Build Graph
+tr = tf.placeholder(tf.float32, [None, 784])
+te = tf.placeholder(tf.float32, [784])
+
+distance = tf.reduce_sum(tf.square(tf.substract(te, tr)), axis=1)
+pred = tf.nn.top_k(distance, k)
+
+init = tf.global_variables_initializer()
+
+with tf.Session() as sess:
+	sess.run(init)
+
+	for i in range(len(testdata)):
+		nn_index = sess.run(pred, feed_dict={tr:traindata, te:testdata[i, :]})
+
+
+# 链表的快排
+def sortList(head):
+	if head is None or head.next is None:
+		return head
+
+	small, large, cur = ListNode(0), ListNode(0), head.next
+	sp, lp = small, large
+
+	while cur:
+		if cur.val <= head.val:
+			sp.next = cur
+			sp = sp.next
+		else:
+			lp.next = cur
+			lp = lp.next
+		cur = cur.next
+
+	sp.next, lp.next = None, None
+
+	small, large = self.sortList(small.next), self.sortList(large.next)
+
+	sp = small
+
+	if sp:
+		while sp.next:
+			sp = sp.next
+		sp.next = head
+		head.next = large
+		return small
+	else:
+		head.next = large
+		return head
+
+def maxPooling(nums, k):
+	from collections import deque
+	q = deque()
+
+	for i, x in enumerate(nums):
+		if q and i - q[0] >= k:
+			q.popleft()
+
+		while q and nums[q[-1]] <= x:
+			q.pop()
+
+		q.append(i)
+
+		if i >= k - 1:
+			res.append(nums[q[0]])
+	return res
