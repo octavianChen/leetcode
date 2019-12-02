@@ -50,6 +50,19 @@ def canJump(nums):
         if dp[i] < 0:
             return False
     return True
+
+# 贪心算法，这里只关心是否能达到末尾，也就是说我们只对到达的最远位置感兴趣，维护一个变量
+# reach，表示最远到达的位置
+def canJump(nums):
+    n, reach = len(nums), 0
+
+    for i in range(n):
+        if i > reach or reach >= n - 1:
+            break
+        reach = max(reach, i + nums[i]) # i + nums[i] 表示当前能到的最远位置
+
+    return reach >= n - 1 
+
     
 
 # 56 Merge Intervals

@@ -549,8 +549,25 @@ def findSubstring(s, words):
             res.append(i)
     return res
 
-# 31 Next Permutation
+# 31 Next Permutation, 从后往前找到递增数列结束的位置，然后从后往前找比该位置
+# 大的第一个数，然后交换位置，然后从 i+1 到结尾翻转
+def nextPermutation(nums):
+    n, j = len(nums), len(nums) - 1
 
+    for i in range(n-2, -1, -1):
+        if nums[i+1] > nums[i]:
+            while j > i:
+                if nums[j] > nums[i]:
+                    break
+                j -= 1
+            nums[i], nums[j] = nums[j], nums[i]
+
+            for k in range(i+1, (n+i)//2+1):
+                nums[k], nums[n-k+i] = nums[n-k+i], nums[k]
+            return
+    
+    for i in range(n//2):
+        nums[i], nums[n-1-i] = nums[n-1-i], nums[i]
 
 # 32 Longest Valid Parentheses, 通项公式dp[i] 表示以 s[i-1] 结尾的最长长度
 def longestValidParentheses(s):
