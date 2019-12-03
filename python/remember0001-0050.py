@@ -533,10 +533,17 @@ def isMatch(s, p):
 
     return dp[len(s)][len(p)]
 
-# 45 Jump Game II
+# 45 Jump Game II, cur 表示当前能跳的最远位置， last 表示上一步能跳的最远位置
+# 当 last 大于 i 的时候，需要更新res了，并且上一步最远的位置需要更新了
 def jump(nums):
-    
+    res, cur, last = 0, 0, 0
 
+    for i in range(len(nums)):
+        if i > last: 
+            res += 1
+            last = cur
+        cur = max(cur, i + nums[i])
+    return res
 
 
 # 46 Permutations

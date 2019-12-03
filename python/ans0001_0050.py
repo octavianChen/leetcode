@@ -750,6 +750,19 @@ def isMatch(s, p):
 
     return dp[len(s)][len(p)]
 
+# 45 Jump Game II
+def jump(nums):
+    cur, last, res = 0, 0, 0
+
+    for index, val in enumerate(nums):
+        if index > last:
+            last = cur
+            res += 1
+
+        cur = max(cur, index + val)
+
+    return res
+
 # 46 Permutations
 def permute(nums):
     out, res, visited = [], [], [0] * len(nums)
