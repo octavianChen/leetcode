@@ -645,3 +645,16 @@ def maxPooling(nums, k):
 	return res
 
 
+def longestValidParentheses(s):
+	dp, res = [0 for _ in range(len(s)+1)], 0
+
+	for i in range(1, len(s) + 1):
+		j = i - 2 - dp[i-1]
+
+		if s[i-1] == "(" or j < 0 or s[j] == ")":
+			dp[i] = 0
+		else:
+			dp[i] = dp[i-1] + dp[j] + 2
+			res = max(res, dp[i])
+
+	return res

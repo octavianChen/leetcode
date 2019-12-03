@@ -63,7 +63,6 @@ def canJump(nums):
 
     return reach >= n - 1 
 
-    
 
 # 56 Merge Intervals
 def merge(intervals):

@@ -129,10 +129,7 @@ def isMatch(s, p):
 
     for i in range(1, len(s)+1):
         for j in range(1, len(p) + 1):
-            if s[i-1] == p[j-1]:
-                dp[i][j] = dp[i-1][j-1]
-
-            elif p[j-1] == ".":
+            if s[i-1] == p[j-1] or p[j-1] == ".":
                 dp[i][j] = dp[i-1][j-1]
 
             elif p[j-1] == "*": # dp[i][j-1]匹配一次dp[i][j-2] 匹配零次, 

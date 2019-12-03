@@ -118,27 +118,18 @@ def findMedianSortedArrays1(nums1, i, nums2, j, k):
 
 
 # 5 Longest Palindromic Substring
-def longestPalindrome(self, s):
+def longestPalindrome(s):
     n = len(s)
-    dp = [[None for _ in range(n)] for _ in range(n)]
-    res = 0
-    start = 0
-    
-    if n == 0:
-        return s
-    
-    for l in range(1, n+1):
-        for i in range(n-l+1):
-            j = i + l - 1
-            if l <= 2:
-                dp[i][j] = (s[i] == s[j])
-            else:
-                dp[i][j] = (dp[i+1][j-1] and s[i] == s[j])
-            
-            if dp[i][j]:
-                res = max(res, j-i+1)
-                start = i
-    return s[start:start+res]
+    dp, start, maxlen = [[False for _ in range(n)] for _ in range(n)], 0, 1
+
+    for i in range(n):
+        dp[i][i] = True
+        for j in range(i):
+            dp[j][i] = (s[i] == s[j]) and (i - j < 2 or dp[j+1][i-1])
+
+            if dp[j][i] and maxlen < i - j + 1:
+                start, maxlen = j, i - j + 1
+    return s[start:start + maxlen]
 
 
 # 6 ZigZag Conversion

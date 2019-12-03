@@ -13,6 +13,25 @@ def isPerfectSquare(num):
 			lo = mid + 1
 	return lo * lo == num
 
+# 368 Largest Divisible Subset, 排序后dp[i]表示到nums[i]位置的最长可整除子集合的长度
+def largestDivisibleSubset(nums):
+	nums = sorted(nums)
+	dp, p, res, mx, mx_idx = [0 for _ in range(len(nums))], [0 for _ in range(len(nums))], [], 0, 0
+
+	for i in range(len(nums)-1, -1, -1):
+		for j in range(i, len(nums)):
+			if nums[j] % nums[i] == 0 and dp[i] < dp[j] + 1:
+				dp[i], p[i] = dp[j] + 1, j
+
+			if mx < dp[i]:
+				mx, mx_idx = dp[i], i
+
+	for _ in range(mx):
+		res.append(nums[mx_idx])
+		mx_idx = p[mx_idx]
+	return res
+
+
 # 373 Find K Pairs with Smallest Sums
 def kSmallestPairs(nums1, nums2, k):
 	vec = []
