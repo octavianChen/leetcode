@@ -167,6 +167,25 @@ class Solution(object):
         help(root)
         return self.res
 
+# 128 Longest Consecutive Sequence, 建一个字典，访问过为True， 然后逐个遍历 x
+# 然后查看 ...x-2, x-1, x+1, x+2...是否在字典中
+def longestConsecutive(nums):
+    m, maxlen = {x:False for x in nums}, 0
+
+    for key in m:
+        if not m[key]:
+            cur, right = key + 1, 0
+
+            while cur in m:
+                right, m[cur], cur = right + 1, True, cur + 1
+
+            cur, left = key - 1, 0
+
+            while cur in m:
+                left, m[cur], cur = left + 1, True, cur - 1
+        maxlen = max(maxlen, left + right + 1)
+    return maxlen
+
 # 132 Palindrome Partition II, dp[i] 表示区间[0, i]内需要切的刀数
 def minCut(s):
     if not s:

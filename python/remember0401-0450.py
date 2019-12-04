@@ -1,3 +1,22 @@
+# 410 Split Array Largest Sum, dp[i][j]将数组中前 j 个数字分成 i 组所能得到的子数组
+# 最大值，要算出子数组和。同时注意k的取值为什么是这样的
+def splitArray(nums, m):
+	 n = len(nums)
+	 sums, dp = [0 for _ in range(n+1)], [[float("inf") for _ in range(n+1)] for _ in range(m+1)]
+	 dp[0][0] = 0
+
+	 for i in range(1, n+1):
+	 	sums[i] = sums[i-1] + nums[i-1]
+
+	 for i in range(1, m+1): # i个子数组, 最多划分成m个
+	 	for j in range(1, n + 1): # 前 j 个数
+	 		for k in range(i-1, j): # 前 k 个数
+	 			val = max(dp[i-1][k], sums[j] - sums[k])
+	 			dp[i][j] = min(dp[i][j], val)
+
+	 return dp[m][n]
+
+
 # 416 Partition Equal Subset Sum, 注意状态转移方程
 def canPartition(nums):
 	val = sum(nums)

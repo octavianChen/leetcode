@@ -34,6 +34,23 @@ def longestPalindrome(s):
 			cnt += 1
 	return len(s) - cnt + 1 if cnt else len(s)
 
+# 410 Split Array Largest Sum, dp[i][j] 是数组前 j 个数被分成 i 个子序列时子数组的
+# 最大值
+def splitArray(nums, m):
+	n = len(nums)
+	sums, dp = [0 for _ in range(n+1)], [[float("inf") for _ in range(n+1)] for j in range(m+1)]
+
+	for i in range(1, n+1):
+		sums[i] = sums[i-1] + nums[i-1]
+
+	for i in range(1, m+1):
+		for j in range(1, n+1):
+			for k in range(i-1, j):
+				val = min(dp[i-1][k], sums[j] - sums[k])
+				dp[i][j] = min(dp[i][j], val)
+
+	return dp[m][n]
+
 
 # 414 Third Maximum Number
 def thirdMax(nums):
