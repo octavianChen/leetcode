@@ -509,8 +509,8 @@ def help(a, b):
     vals = vals[:i+1]
 
     return "".join(str(x) for x in vals[::-1])
-    
 
+    
 # 44 Wildcard Matching, 状态转移方程要确定
 def isMatch(s, p):
     dp = [[False for _ in range(len(p)+1)] for _ in range(len(s)+1)]

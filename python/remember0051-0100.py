@@ -502,3 +502,22 @@ def recoverTree(root):
 
     err[0].val, err[1].val = err[1].val, err[0].val
 
+def recoverTree(root):
+    st, p, pre, first, second = [], root, None, None, None
+
+    while p or st:
+        while p:
+            st.append(p)
+            p = p.left
+
+        p = st.pop()
+
+        if pre:
+            if p.val < pre.val:
+                if first is None:
+                    first = pre
+                second = p
+
+        pre, p = p, p.right
+
+    first.val, second.val = second.val, first.val

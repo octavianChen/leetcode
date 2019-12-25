@@ -1,7 +1,7 @@
 # 856 Score of Parenthesis, 遇到左括号，压入当前得分，并清零，遇到右括号，内层得分
 # 已经计算出来，乘以2并与1比较，再加上并行的值
 def scoreOfParentheses(S):
-    m, res = {}, 0
+    st, res = [], 0
     for char in S:
         if char == "(":
             m.append(res)

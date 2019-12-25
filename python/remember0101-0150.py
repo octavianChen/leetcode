@@ -1,4 +1,4 @@
-class TreeNode(object):
+ class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
@@ -166,6 +166,30 @@ class Solution(object):
 
         help(root)
         return self.res
+
+# 127 Word Ladder
+def ladderLength(beginWord, endWord, wordList):
+    m = set(wordList)
+
+    import string, Queue
+
+    q = Queue.Queue()
+    q.put((beginWord, 1))
+
+    while not q.empty():
+        word, lens = q.get()
+
+        if word == endWord:
+            return lens
+
+        for i in range(len(word)):
+            for c in string.lowercase:
+                neword = word[0:i] + c + word[i+1:]
+
+                if neword != word and neword in m:
+                    m.remove(neword)
+                    q.put((neword, lens+1))
+    return 0
 
 # 128 Longest Consecutive Sequence, 建一个字典，访问过为True， 然后逐个遍历 x
 # 然后查看 ...x-2, x-1, x+1, x+2...是否在字典中

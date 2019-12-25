@@ -1,5 +1,5 @@
 # 559 Maximum Depth of N-ary Tree, 注意 map 的使用
-def maxDepth(root):
+def maxDepth(self, root):
 	if not root:
 		return 0
 
